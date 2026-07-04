@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { Trophy, BookOpen, Shield, Award, Heart, CheckCircle } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import Tippy from "@/components/ui/Tippy";
 import { useFirestoreCollection } from "@/hooks/useFirestore";
 import { achievements as staticAchievements } from "@/data/achievements";
 import { GlowLine, TextBlowOut, FloatingCloud } from "@/components/StoryEffects";
 
 const CATEGORY_MAP: Record<string, { icon: any; color: string; label: string }> = {
-  leadership: { icon: Shield, color: "#ff3cac", label: "Leadership" },
-  academic: { icon: BookOpen, color: "#00f5ff", label: "Academic" },
-  certification: { icon: Award, color: "#0077cc", label: "Certification" },
-  competition: { icon: Trophy, color: "#f59e0b", label: "Competition" },
-  community: { icon: Heart, color: "#10b981", label: "Community" },
+  leadership: { icon: LucideIcons.Shield, color: "#ff3cac", label: "Leadership" },
+  academic: { icon: LucideIcons.BookOpen, color: "#00f5ff", label: "Academic" },
+  certification: { icon: LucideIcons.Award, color: "#0077cc", label: "Certification" },
+  competition: { icon: LucideIcons.Trophy, color: "#f59e0b", label: "Competition" },
+  community: { icon: LucideIcons.Heart, color: "#10b981", label: "Community" },
 };
 
 const LOG_MESSAGES: Record<string, string> = {
@@ -26,9 +26,14 @@ const LOG_MESSAGES: Record<string, string> = {
   nss: "[LOG] Community outreach: Volunteer operations successfully deployed.",
 };
 
-function AchievementCard({ achievement, index }: { achievement: typeof staticAchievements[number]; index: number }) {
-  const cat = CATEGORY_MAP[achievement.category] || { icon: CheckCircle, color: "var(--t-accent)", label: "General" };
-  const Icon = cat.icon;
+function AchievementCard({ achievement, index }: { achievement: any; index: number }) {
+  const cat = CATEGORY_MAP[achievement.category] || { icon: LucideIcons.CheckCircle, color: "var(--t-accent)", label: "General" };
+  const cardColor = achievement.color || cat.color;
+
+  let Icon = cat.icon;
+  if (achievement.icon && (LucideIcons as any)[achievement.icon]) {
+    Icon = (LucideIcons as any)[achievement.icon];
+  }
 
   return (
     <Tippy content={LOG_MESSAGES[achievement.id] || `[LOG] ${achievement.title} verified on telemetry.`} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={250}>
@@ -43,17 +48,17 @@ function AchievementCard({ achievement, index }: { achievement: typeof staticAch
       >
         {/* Animated Scanner Top Line */}
         <div className="absolute top-0 left-0 right-0 h-[2px] opacity-20 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ background: `linear-gradient(90deg, transparent, ${cat.color}, transparent)` }} />
+          style={{ background: `linear-gradient(90deg, transparent, ${cardColor}, transparent)` }} />
 
         <div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{ background: `${cat.color}15`, border: `1px solid ${cat.color}35` }}>
-                <Icon size={16} style={{ color: cat.color }} />
+                style={{ background: `${cardColor}15`, border: `1px solid ${cardColor}35` }}>
+                <Icon size={16} style={{ color: cardColor }} />
               </div>
               <span className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full"
-                style={{ background: `${cat.color}10`, color: cat.color }}>
+                style={{ background: `${cardColor}10`, color: cardColor }}>
                 {cat.label}
               </span>
             </div>

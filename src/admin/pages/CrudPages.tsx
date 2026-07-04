@@ -105,7 +105,18 @@ export function AchievementsPage() {
       fields={[
         { key: "title", label: "Title", required: true },
         { key: "organization", label: "Organization" },
-        { key: "category", label: "Category", placeholder: "academic / certification / leadership / community / competition" },
+        {
+          key: "category",
+          label: "Category",
+          required: true,
+          options: ["leadership", "academic", "certification", "competition", "community"]
+        },
+        {
+          key: "icon",
+          label: "Icon / Logo",
+          options: ["Trophy", "BookOpen", "Shield", "Award", "Heart", "Star", "Cpu", "Zap", "Wrench", "Code"]
+        },
+        { key: "color", label: "Custom Hex Color", placeholder: "e.g. #ff3cac (leave blank for category default)", type: "color" },
         { key: "description", label: "Description", textarea: true },
       ]}
       displayField="title"
@@ -119,6 +130,7 @@ export function AchievementsPage() {
 interface FieldDef {
   key: string; label: string; required?: boolean;
   placeholder?: string; textarea?: boolean; type?: string;
+  options?: string[];
 }
 
 interface ImageFieldDef {
@@ -183,11 +195,34 @@ function CrudPage({ title, collectionName, fields, tagField, listTagField, image
               </h2>
               <button type="button" onClick={() => setEditing(null)} style={{ color: "var(--t-muted)" }}><X size={18} /></button>
             </div>
-            {fields.map(f => (
-              <Field key={f.key} label={f.label} value={editing[f.key] || ""}
-                onChange={v => setEditing({ ...editing, [f.key]: v })}
-                required={f.required} placeholder={f.placeholder} textarea={f.textarea} type={f.type} />
-            ))}
+            {fields.map(f => {
+              if (f.options) {
+                return (
+                  <div key={f.key}>
+                    <label className="block font-mono text-[11px] uppercase tracking-widest mb-1.5" style={{ color: "var(--t-muted)" }}>
+                      {f.label} {f.required && <span className="text-red-400">*</span>}
+                    </label>
+                    <select
+                      value={editing[f.key] || ""}
+                      onChange={e => setEditing({ ...editing, [f.key]: e.target.value })}
+                      required={f.required}
+                      className="w-full rounded-lg px-3 py-2 text-sm outline-none transition-all"
+                      style={{ background: "var(--t-bg)", border: `1px solid var(--t-border)`, color: "var(--t-text)" }}
+                    >
+                      <option value="">Select {f.label}</option>
+                      {f.options.map(opt => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                );
+              }
+              return (
+                <Field key={f.key} label={f.label} value={editing[f.key] || ""}
+                  onChange={v => setEditing({ ...editing, [f.key]: v })}
+                  required={f.required} placeholder={f.placeholder} textarea={f.textarea} type={f.type} />
+              );
+            })}
             {imageField && (
               <ImageUpload label={imageField.label} value={editing[imageField.key] || ""}
                 onChange={v => setEditing({ ...editing, [imageField.key]: v })} required={imageField.required} />
