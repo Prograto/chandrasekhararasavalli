@@ -61,7 +61,7 @@ export function DroneNavigator() {
   // Animate drone between waypoints, scrubbed to scroll
   useEffect(() => {
     const drone = droneRef.current;
-    if (!drone) return;
+    if (!drone || trailPts.length < SECTIONS.length) return;
     const flipWrapper = drone.querySelector(".drone-flip-wrapper");
     const kills: ScrollTrigger[] = [];
 
@@ -119,7 +119,7 @@ export function DroneNavigator() {
     }
 
     return () => kills.forEach(t => t.kill());
-  }, []);
+  }, [trailPts]);
 
   // Draw trail progressively using mask offset animation
   useEffect(() => {
