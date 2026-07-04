@@ -1,0 +1,58 @@
+import type { Certificate } from "@/types";
+
+export const certificates: Certificate[] = [
+  {
+    id: "aws-cloud-practitioner",
+    title: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    date: "2024",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80",
+    credentialUrl: "https://aws.amazon.com/certification/",
+    color: "#f59e0b",
+  },
+  {
+    id: "google-aiml",
+    title: "AI/ML Program",
+    issuer: "Google",
+    date: "2024",
+    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&q=80",
+    credentialUrl: "https://cloud.google.com/training",
+    color: "#06b6d4",
+  },
+  {
+    id: "nptel-python",
+    title: "Programming in Python",
+    issuer: "NPTEL — Silver Medal",
+    date: "2023",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80",
+    credentialUrl: "https://nptel.ac.in/",
+    color: "#7c3aed",
+  },
+  {
+    id: "nptel-dsa",
+    title: "Data Structures & Algorithms",
+    issuer: "NPTEL — Silver Medal",
+    date: "2023",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80",
+    credentialUrl: "https://nptel.ac.in/",
+    color: "#10b981",
+  },
+  {
+    id: "gate",
+    title: "GATE Qualified",
+    issuer: "Ministry of Education, India",
+    date: "2024",
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80",
+    credentialUrl: "https://gate.iitm.ac.in/",
+    color: "#f59e0b",
+  },
+  {
+    id: "ieee-leadership",
+    title: "IEEE Vice Chair",
+    issuer: "IEEE Student Chapter",
+    date: "2023–2024",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80",
+    credentialUrl: "https://www.ieee.org/",
+    color: "#7c3aed",
+  },
+];
