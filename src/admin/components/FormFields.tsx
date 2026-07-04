@@ -231,17 +231,19 @@ export function SkillsInput({
   onChange
 }: {
   label: string;
-  skills: { name: string; level: number }[];
-  onChange: (s: { name: string; level: number }[]) => void;
+  skills: { name: string; level: number; hoverMsg?: string }[];
+  onChange: (s: { name: string; level: number; hoverMsg?: string }[]) => void;
 }) {
   const [name, setName] = useState("");
   const [level, setLevel] = useState(80);
+  const [hoverMsg, setHoverMsg] = useState("");
 
   const add = () => {
     if (name.trim()) {
-      onChange([...skills, { name: name.trim(), level: Number(level) }]);
+      onChange([...skills, { name: name.trim(), level: Number(level), hoverMsg: hoverMsg.trim() || undefined }]);
       setName("");
       setLevel(80);
+      setHoverMsg("");
     }
   };
 
@@ -250,7 +252,7 @@ export function SkillsInput({
       <label className="block font-mono text-[11px] uppercase tracking-widest mb-1.5" style={{ color: "var(--t-muted)" }}>
         {label}
       </label>
-      <div className="flex gap-2 mb-2 items-center">
+      <div className="flex flex-col sm:flex-row gap-2 mb-2 items-stretch sm:items-center">
         <input
           value={name}
           onChange={e => setName(e.target.value)}
@@ -259,7 +261,15 @@ export function SkillsInput({
           style={{ background: "var(--t-bg)", border: `1px solid var(--t-border)`, color: "var(--t-text)" }}
           onKeyDown={e => e.key === "Enter" && (e.preventDefault(), add())}
         />
-        <div className="flex items-center gap-1.5">
+        <input
+          value={hoverMsg}
+          onChange={e => setHoverMsg(e.target.value)}
+          placeholder="Hover Tooltip Msg"
+          className="flex-1 rounded-lg px-3 py-2 text-sm outline-none"
+          style={{ background: "var(--t-bg)", border: `1px solid var(--t-border)`, color: "var(--t-text)" }}
+          onKeyDown={e => e.key === "Enter" && (e.preventDefault(), add())}
+        />
+        <div className="flex items-center gap-1.5 shrink-0">
           <input
             type="number"
             min="0"
@@ -269,18 +279,18 @@ export function SkillsInput({
             className="w-16 rounded-lg px-2 py-2 text-sm outline-none text-center"
             style={{ background: "var(--t-bg)", border: `1px solid var(--t-border)`, color: "var(--t-text)" }}
           />
-          <span className="text-xs" style={{ color: "var(--t-muted)" }}>%</span>
+          <span className="text-xs mr-2" style={{ color: "var(--t-muted)" }}>%</span>
+          <button type="button" onClick={add} className="px-3 py-2 rounded-lg text-sm"
+            style={{ background: `var(--t-accent)15`, color: "var(--t-accent)" }}>
+            <Plus size={14} />
+          </button>
         </div>
-        <button type="button" onClick={add} className="px-3 py-2 rounded-lg text-sm"
-          style={{ background: `var(--t-accent)15`, color: "var(--t-accent)" }}>
-          <Plus size={14} />
-        </button>
       </div>
       <div className="flex flex-wrap gap-2 mt-2">
         {skills.map((s, i) => (
           <span key={i} className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono"
             style={{ background: `var(--t-accent)10`, color: "var(--t-accent)", border: `1px solid var(--t-accent)20` }}>
-            {s.name} ({s.level}%)
+            {s.name} ({s.level}%) {s.hoverMsg && <span className="opacity-60 text-[9px]" title={s.hoverMsg}>💬</span>}
             <button type="button" onClick={() => onChange(skills.filter((_, j) => j !== i))} className="hover:opacity-70">
               <X size={10} />
             </button>

@@ -13,9 +13,9 @@ const SKILL_STORIES: Record<string, string> = {
   OpenCV:"Eyes of the aircraft. Sees what humans miss.", Firebase:"Mission control relay. Real-time comms.",
 };
 
-function SkillBar({ name, level, color, index }: { name: string; level: number; color: string; index: number }) {
+function SkillBar({ name, level, color, index, hoverMsg }: { name: string; level: number; color: string; index: number; hoverMsg?: string }) {
   return (
-    <Tippy content={SKILL_STORIES[name] || `${name}: Part of the instrument cluster.`} theme="flight-log" animation="shift-away" delay={[300, 100]} maxWidth={220}>
+    <Tippy content={hoverMsg || SKILL_STORIES[name] || `${name}: Part of the instrument cluster.`} theme="flight-log" animation="shift-away" delay={[300, 100]} maxWidth={220}>
       <div className="mb-3 cursor-default">
         <div className="flex justify-between items-center mb-1.5">
           <span className="text-sm" style={{ color: "var(--t-text)", opacity: 0.8 }}>{name}</span>
@@ -79,7 +79,7 @@ export function Skills() {
                     <p className="font-mono text-xs" style={{ color: "var(--t-muted)" }}>{(cat.skills || []).length} skills</p>
                   </div>
                 </div>
-                {(cat.skills || []).map((skill: any, i: number) => <SkillBar key={skill.name} name={skill.name} level={skill.level} color={cat.color} index={i} />)}
+                {(cat.skills || []).map((skill: any, i: number) => <SkillBar key={skill.name} name={skill.name} level={skill.level} color={cat.color} index={i} hoverMsg={skill.hoverMsg} />)}
               </div>
             </motion.div>
           ))}

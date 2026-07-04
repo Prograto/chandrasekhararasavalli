@@ -13,6 +13,7 @@ export function ExperiencePage() {
         { key: "role", label: "Role" },
         { key: "duration", label: "Duration", placeholder: "Jun 2024 – Aug 2024" },
         { key: "type", label: "Type", placeholder: "internship / freelance / full-time" },
+        { key: "hoverMsg", label: "Hover Tooltip Msg", placeholder: "e.g. Flight log comment shown on hover" },
         { key: "summary", label: "Summary", textarea: true },
       ]}
       tagField={{ key: "stack", label: "Tech Stack" }}
@@ -86,6 +87,7 @@ export function FreelancePage() {
       fields={[
         { key: "client", label: "Client Name", required: true },
         { key: "category", label: "Category", placeholder: "e.g. Healthcare · Maintenance" },
+        { key: "hoverMsg", label: "Hover Tooltip Msg", placeholder: "e.g. Flight log comment shown on hover" },
         { key: "summary", label: "Summary", textarea: true },
         { key: "link", label: "Portfolio Link" },
       ]}
@@ -117,6 +119,7 @@ export function AchievementsPage() {
           options: ["Trophy", "BookOpen", "Shield", "Award", "Heart", "Star", "Cpu", "Zap", "Wrench", "Code"]
         },
         { key: "color", label: "Custom Hex Color", placeholder: "e.g. #ff3cac (leave blank for category default)", type: "color" },
+        { key: "hoverMsg", label: "Hover Tooltip Msg", placeholder: "e.g. Flight log comment shown on hover" },
         { key: "description", label: "Description", textarea: true },
       ]}
       displayField="title"

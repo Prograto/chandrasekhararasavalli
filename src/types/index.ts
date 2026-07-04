@@ -32,6 +32,7 @@ export interface ExperienceItem {
   summary: string;
   highlights: string[];
   stack: string[];
+  hoverMsg?: string;
 }
 
 export interface FreelanceClient {
@@ -42,6 +43,7 @@ export interface FreelanceClient {
   highlights: string[];
   stack: string[];
   link?: string;
+  hoverMsg?: string;
 }
 
 export interface Project {
@@ -57,6 +59,7 @@ export interface Project {
   verified: boolean;
   metric?: string;
   color: string;
+  hoverMsg?: string;
 }
 
 export interface GithubRepoStats {
@@ -72,7 +75,7 @@ export interface SkillCategory {
   label: string;
   icon: string;
   color: string;
-  skills: { name: string; level: number }[];
+  skills: { name: string; level: number; hoverMsg?: string }[];
 }
 
 export type AchievementCategory = "leadership" | "certification" | "academic" | "competition" | "community";
@@ -85,6 +88,9 @@ export interface Achievement {
   category: AchievementCategory;
   year?: string;
   image?: string;
+  hoverMsg?: string;
+  color?: string;
+  icon?: string;
 }
 
 export interface Certificate {

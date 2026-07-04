@@ -15,7 +15,7 @@ const STORY_CLOUDS: Record<string, string> = {
 
 function TimelineItem({ item, index }: { item: typeof staticExperience[number]; index: number }) {
   return (
-    <Tippy content={STORY_CLOUDS[item.id] || item.summary} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
+    <Tippy content={item.hoverMsg || STORY_CLOUDS[item.id] || item.summary} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
       <motion.div
         initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40, scale: 0.95 }}
         whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -57,7 +57,7 @@ function TimelineItem({ item, index }: { item: typeof staticExperience[number]; 
 
 function FreelanceItem({ client }: { client: typeof staticFreelance[number] }) {
   return (
-    <Tippy content={STORY_CLOUDS[client.id] || client.summary} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
+    <Tippy content={client.hoverMsg || STORY_CLOUDS[client.id] || client.summary} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
       <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
         <div className="glass rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300" style={{ borderColor: `var(--t-accent)10` }}>
           <div className="flex items-start justify-between gap-4 mb-3">

@@ -35,7 +35,7 @@ function ProjectCard({ project, stats, index }: { project: Project; stats?: Gith
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <Tippy content={STORY_CLOUDS[project.id] || project.description} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
+    <Tippy content={project.hoverMsg || STORY_CLOUDS[project.id] || project.description} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
       <motion.div ref={ref}
         initial={{ opacity: 0, y: 50, filter: "blur(6px)" }}
         whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}

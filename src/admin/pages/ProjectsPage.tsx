@@ -7,11 +7,13 @@ interface ProjectDoc {
   title: string; slug: string; description: string; stack: string[];
   image: string; githubUrl: string; liveUrl: string;
   featured: boolean; verified: boolean; metric: string; color: string;
+  hoverMsg?: string;
 }
 
 const EMPTY: ProjectDoc = {
   title: "", slug: "", description: "", stack: [], image: "",
   githubUrl: "", liveUrl: "", featured: false, verified: false, metric: "", color: "#7c3aed",
+  hoverMsg: "",
 };
 
 export function ProjectsPage() {
@@ -69,6 +71,7 @@ export function ProjectsPage() {
             </div>
             <ImageUpload label="Project Image" value={editing.image} onChange={v => setEditing({ ...editing, image: v })} />
             <Field label="Metric" value={editing.metric} onChange={v => setEditing({ ...editing, metric: v })} placeholder="2000+ users" />
+            <Field label="Hover Tooltip Msg" value={editing.hoverMsg || ""} onChange={v => setEditing({ ...editing, hoverMsg: v })} placeholder="e.g. Flight log comment shown on hover" />
             <div className="flex items-center gap-4">
               <label className="flex items-center gap-2 text-sm cursor-pointer" style={{ color: "var(--t-text)" }}>
                 <input type="checkbox" checked={editing.featured} onChange={e => setEditing({ ...editing, featured: e.target.checked })} /> Featured
