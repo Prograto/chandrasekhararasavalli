@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Save, Trash2, Plus, X, Upload, AlertCircle } from "lucide-react";
 import { storage } from "@/lib/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -36,6 +36,10 @@ export function ImageUpload({ label, value, onChange, required = false }: {
   const [preview, setPreview] = useState(value);
   const [tab, setTab] = useState<"upload" | "url">("upload");
 
+  useEffect(() => {
+    setPreview(value);
+  }, [value]);
+
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !storage) return;
@@ -61,8 +65,11 @@ export function ImageUpload({ label, value, onChange, required = false }: {
     }
   };
 
-  const handleUrlSubmit = (e: React.FormEvent, url: string) => {
-    e.preventDefault();
+  const handleUrlSubmit = (e: React.FormEvent | React.MouseEvent | React.KeyboardEvent, url: string) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (url.trim()) {
       onChange(url);
       setPreview(url);
@@ -116,19 +123,34 @@ export function ImageUpload({ label, value, onChange, required = false }: {
           <input type="file" accept="image/*" onChange={handleFileUpload} disabled={uploading} className="hidden" />
         </label>
       ) : (
-        <form onSubmit={(e) => handleUrlSubmit(e, value)} className="flex gap-2">
+        <div className="flex gap-2">
           <input
             type="url"
             value={value}
-            onChange={e => onChange(e.target.value)}
+            onChange={e => {
+              onChange(e.target.value);
+              setPreview(e.target.value);
+            }}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                e.stopPropagation();
+                handleUrlSubmit(e, value);
+              }
+            }}
             placeholder="https://example.com/image.jpg"
             className="flex-1 rounded-lg px-3 py-2 text-sm outline-none"
             style={{ background: "var(--t-bg)", border: `1px solid var(--t-border)`, color: "var(--t-text)" }}
           />
-          <button type="submit" className="px-3 py-2 rounded-lg text-sm font-medium" style={{ background: "var(--t-accent)", color: "var(--t-bg)" }}>
+          <button
+            type="button"
+            onClick={(e) => handleUrlSubmit(e, value)}
+            className="px-3 py-2 rounded-lg text-sm font-medium"
+            style={{ background: "var(--t-accent)", color: "var(--t-bg)" }}
+          >
             Set
           </button>
-        </form>
+        </div>
       )}
 
       {uploading && <p className="text-xs mt-2" style={{ color: "var(--t-accent)" }}>Uploading...</p>}
@@ -139,8 +161,6 @@ export function ImageUpload({ label, value, onChange, required = false }: {
       )}
     </div>
   );
-}
-
 // ─── Tag/List Input ───
 export function TagInput({ label, tags, onChange }: { label: string; tags: string[]; onChange: (t: string[]) => void }) {
   const [input, setInput] = useState("");
