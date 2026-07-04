@@ -17,9 +17,10 @@ import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Certificates } from "@/components/sections/Certificates";
+import { Achievements } from "@/components/sections/Achievements";
 import { Contact } from "@/components/sections/Contact";
 
-const SECTION_IDS = ["hero","about","services","experience","projects","skills","certificates","contact"];
+const SECTION_IDS = ["hero","about","services","experience","projects","skills","certificates","achievements","contact"];
 
 export function Portfolio() {
   useLenis();
@@ -44,6 +45,7 @@ export function Portfolio() {
         <Projects />
         <Skills />
         <Certificates />
+        <Achievements />
         <Contact />
       </main>
       <Footer />

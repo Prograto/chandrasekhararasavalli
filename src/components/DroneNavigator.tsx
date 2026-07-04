@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
  * Checkpoints use a location-pin SVG icon.
  */
 
-const SECTIONS = ["hero","about","services","experience","projects","skills","certificates","contact"];
-const LABELS   = ["Home","About","Services","Work","Projects","Skills","Certs","Contact"];
+const SECTIONS = ["hero","about","services","experience","projects","skills","certificates","achievements","contact"];
+const LABELS   = ["Home","About","Services","Work","Projects","Skills","Certs","Awards","Contact"];
 
 // Drone zig-zags along screen edges to avoid center content
 // vx = viewport X%, vy = viewport Y%  (where drone sits on screen)
@@ -23,6 +23,7 @@ const WAYPOINTS = [
   { vx: 90, vy: 50 },
   { vx: 7,  vy: 45 },
   { vx: 92, vy: 48 },
+  { vx: 8,  vy: 46 },
   { vx: 50, vy: 55 },
 ];
 
