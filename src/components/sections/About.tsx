@@ -34,24 +34,78 @@ export function About() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Image */}
+          {/* Terminal Console replacing repetitive avatar image */}
           <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }} className="relative flex justify-center perspective-1000">
-            <Tippy content="The pilot. Narsapur → the tech world." theme="flight-log" animation="shift-away" delay={[300, 100]} maxWidth={220}>
-              <div className="relative w-64 h-80 sm:w-80 sm:h-96">
-                <div className="absolute inset-0 rounded-2xl blur-3xl" style={{ background: `linear-gradient(135deg, var(--t-accent)25, var(--t-accent2)15)` }} />
-                <img src={profile.avatar || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face"} alt={profile.name}
-                  className="relative w-full h-full object-cover object-top rounded-2xl border" style={{ borderColor: `var(--t-accent)40` }} />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }} className="relative flex justify-center w-full perspective-1000">
+            
+            <div className="relative w-full max-w-[340px] sm:max-w-md h-[380px] rounded-2xl border overflow-hidden backdrop-blur-md bg-black/60 shadow-2xl flex flex-col font-mono text-[11px] leading-relaxed" style={{ borderColor: `var(--t-accent)40` }}>
+              <div className="absolute inset-0 rounded-2xl blur-3xl -z-10" style={{ background: `linear-gradient(135deg, var(--t-accent)25, var(--t-accent2)15)` }} />
+              
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between px-4 py-3 bg-black/40 border-b border-white/5">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                </div>
+                <span className="text-[10px] text-white/40 tracking-wider">prograto@sys-core:~</span>
+                <span className="w-10" />
               </div>
-            </Tippy>
+
+              {/* Terminal Content */}
+              <div className="flex-1 p-4 overflow-y-auto space-y-3 scrollbar-none text-left">
+                {/* neofetch info */}
+                <div className="space-y-0.5 text-white/70">
+                  <p><span style={{ color: "var(--t-accent)" }}>root@prograto:~$</span> neofetch</p>
+                  <p style={{ color: "var(--t-accent)" }}>=================================</p>
+                  <p><span className="text-white/40 font-bold">Host:</span> {profile.name}</p>
+                  <p><span className="text-white/40 font-bold">Role:</span> {profile.role}</p>
+                  <p><span className="text-white/40 font-bold">Base:</span> {profile.location}</p>
+                  <p><span className="text-white/40 font-bold">Stack:</span> TypeScript / Go / Python / SQL</p>
+                  <p><span className="text-white/40 font-bold">Contact:</span> {profile.email}</p>
+                </div>
+
+                {/* System Metrics */}
+                <div className="border-t border-white/5 pt-3 space-y-2">
+                  <div className="flex items-center justify-between text-white/50 text-[10px]">
+                    <span>PROCESSOR LOAD</span>
+                    <span style={{ color: "var(--t-accent)" }}>ACTIVE</span>
+                  </div>
+                  <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                    <motion.div className="h-full rounded-full" style={{ background: "var(--t-accent)" }}
+                      animate={{ width: ["32%", "74%", "45%", "89%", "55%", "32%"] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+                  </div>
+
+                  <div className="flex items-center justify-between text-white/50 text-[10px]">
+                    <span>PIPELINE CAPACITY</span>
+                    <span style={{ color: "var(--t-accent2)" }}>OPTIMAL</span>
+                  </div>
+                  <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                    <motion.div className="h-full rounded-full" style={{ background: "var(--t-accent2)" }}
+                      animate={{ width: ["82%", "85%", "81%", "87%", "84%", "82%"] }}
+                      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+                  </div>
+                </div>
+
+                {/* Logs Output */}
+                <div className="space-y-0.5 border-t border-white/5 pt-3 text-[10px] text-white/50">
+                  <p style={{ color: "var(--t-accent)" }}>root@prograto:~$ ./run_diagnostics</p>
+                  <p className="text-green-400/80">[OK] Connected database client</p>
+                  <p className="text-green-400/80">[OK] AI inference pipeline loaded</p>
+                  <p className="text-blue-400/80">[INF] Narsapur launchpad system operational</p>
+                  <p className="text-green-400/80">[OK] Drone navigation trail tracking...</p>
+                </div>
+              </div>
+            </div>
+
             {/* Animated stat counters */}
             {settings.aboutStats.map((s, i) => {
               const pos = ["top-4 -right-12","top-1/3 -left-12","bottom-1/3 -right-14","bottom-4 -left-10"];
               return (
                 <motion.div key={s.label} animate={{ y: [i%2===0?-8:8, i%2===0?8:-8, i%2===0?-8:8] }}
                   transition={{ repeat: Infinity, duration: 3 + i * 0.7, ease: "easeInOut" }}
-                  className={`absolute ${pos[i]} glass-hi rounded-xl px-3 py-2`}>
+                  className={`absolute ${pos[i]} glass-hi rounded-xl px-3 py-2 z-15`}>
                   <p className="font-display font-bold text-lg leading-none" style={{ color: "var(--t-text)" }}>
                     <CountUp target={s.num} suffix={s.suffix} />
                   </p>
