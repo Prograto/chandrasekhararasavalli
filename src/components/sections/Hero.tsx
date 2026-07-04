@@ -129,7 +129,7 @@ export function Hero() {
 
         {/* Portrait */}
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
-          className="hidden lg:flex justify-center items-center perspective-1000">
+          className="flex justify-center items-center perspective-1000 mt-10 lg:mt-0">
           <div className="relative group">
             <div className="absolute -inset-4 rounded-[2.5rem] blur-2xl group-hover:blur-3xl transition-all duration-700"
               style={{ background: `linear-gradient(135deg, var(--t-accent)30, var(--t-accent2)20)` }} />

@@ -148,7 +148,7 @@ export function DroneNavigator() {
     <>
       {/* ── Dotted-line flight path with location-pin checkpoints ── */}
       {trailPts.length >= 2 && (
-        <svg className="absolute top-0 left-0 w-full pointer-events-none z-[55] hidden md:block"
+        <svg className="absolute top-0 left-0 w-full pointer-events-none z-[55]"
           style={{ height: pageH || "100%" }}>
           <defs>
             {/* Mask to reveal the dotted path progressively */}
@@ -181,13 +181,13 @@ export function DroneNavigator() {
       )}
 
       {/* ── Fixed Drone ── */}
-      <div ref={droneRef} className="fixed z-[80] pointer-events-none hidden md:block"
-        style={{ width: 160, height: 160, transform: "translate(-50%, -50%)",
+      <div ref={droneRef} className="fixed z-[80] pointer-events-none w-20 h-20 md:w-40 md:h-40"
+        style={{ transform: "translate(-50%, -50%)",
           filter: "drop-shadow(0 8px 30px rgba(0,0,0,0.25))", willChange: "left, top, transform" }}>
         <div className="drone-flip-wrapper w-full h-full relative">
           <video src="/drone.webm" autoPlay loop muted playsInline className="w-full h-full object-contain relative z-10" />
           {/* Glow effect at the bottom */}
-          <div className="absolute bottom-[24px] left-1/2 -translate-x-1/2 w-14 h-4 bg-[var(--t-accent)] rounded-full blur-md opacity-80 animate-pulse pointer-events-none shadow-[0_0_20px_8px_var(--t-accent)]" style={{ transform: "translateX(-50%) scaleY(0.35)" }} />
+          <div className="absolute bottom-[10%] md:bottom-[24px] left-1/2 -translate-x-1/2 w-[35%] md:w-14 h-1 md:h-4 bg-[var(--t-accent)] rounded-full blur-md opacity-80 animate-pulse pointer-events-none shadow-[0_0_20px_8px_var(--t-accent)]" style={{ transform: "translateX(-50%) scaleY(0.35)" }} />
         </div>
       </div>
     </>
