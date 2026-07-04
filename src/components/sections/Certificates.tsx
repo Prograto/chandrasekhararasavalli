@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards, Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Award, Calendar, ExternalLink } from "lucide-react";

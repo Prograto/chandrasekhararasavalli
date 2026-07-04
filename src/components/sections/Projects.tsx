@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Star, GitFork, Eye, ChevronRight } from "lucide-react";
 import Tippy from "@/components/ui/Tippy";
 import { GithubIcon } from "@/components/ui/BrandIcons";
@@ -95,7 +95,7 @@ export function Projects() {
   const { data: liveStats } = useGithubStats(reposToFetch);
   const filtered = displayProjects.filter(p => { if (filter === "All") return true; if (filter === "Featured") return p.featured; return (p.stack || []).some((s: string) => s.toLowerCase().includes(filter.toLowerCase())) || p.description.toLowerCase().includes(filter.toLowerCase()); });
   const visible = showAll ? filtered : filtered.slice(0, 6);
-  const hexParticles = Array.from({ length: 12 }, (_, i) => ({ top: `${5 + Math.random() * 85}%`, left: `${5 + Math.random() * 90}%` }));
+  const hexParticles = Array.from({ length: 12 }, (_) => ({ top: `${5 + Math.random() * 85}%`, left: `${5 + Math.random() * 90}%` }));
 
   return (
     <section id="projects" data-section="projects" className="relative py-28 section-bg-projects">

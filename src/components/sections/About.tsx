@@ -1,9 +1,8 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Tippy from "@/components/ui/Tippy";
+import { motion } from "framer-motion";
 import { useProfile } from "@/hooks/useProfile";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
-import { TextBlowOut, TextReveal, SectionDivider, GlowLine, FloatingCloud, CountUp } from "@/components/StoryEffects";
+import { TextBlowOut, TextReveal, GlowLine, FloatingCloud, CountUp } from "@/components/StoryEffects";
 
 function AscendingParticle({ delay, x }: { delay: number; x: number }) {
   return (
@@ -17,9 +16,6 @@ function AscendingParticle({ delay, x }: { delay: number; x: number }) {
 export function About() {
   const { profile } = useProfile();
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rawY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const y = useSpring(rawY, { stiffness: 60, damping: 20 });
   const { settings } = useSiteSettings();
   const particles = Array.from({ length: 15 }, (_, i) => ({ delay: i * 0.5, x: 5 + Math.random() * 90 }));
 

@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   LayoutDashboard, User, Briefcase, FolderKanban, Wrench,
-  Award, MessageSquare, LogOut, ArrowLeft, Code, Settings, Menu, X as CloseIcon,
+  Award, MessageSquare, LogOut, ArrowLeft, Code, Menu, X as CloseIcon,
   Zap, Trophy, Database, Sliders,
 } from "lucide-react";
 

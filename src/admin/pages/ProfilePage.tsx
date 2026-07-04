@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useFirestoreDoc } from "@/hooks/useFirestore";
-import { Field, ImageUpload, TagInput, SaveBtn, AdminCard } from "@/admin/components/FormFields";
+import { Field, ImageUpload, SaveBtn, AdminCard } from "@/admin/components/FormFields";
 import { profile as staticProfile } from "@/data/profile";
 
 interface ProfileData {

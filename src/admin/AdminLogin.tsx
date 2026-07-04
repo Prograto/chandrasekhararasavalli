@@ -4,7 +4,7 @@ import { isConfigured } from "@/lib/firebase";
 import { LogIn, AlertTriangle, Mail } from "lucide-react";
 
 export function AdminLogin() {
-  const { signIn, signInWithGoogle, error, loading } = useAuth();
+  const { signIn, signInWithGoogle, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);

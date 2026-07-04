@@ -47,7 +47,7 @@ export function useSiteSettings() {
 
     const fetchSettings = async () => {
       try {
-        const settingsDoc = await getDoc(doc(db, "siteContent", "settings"));
+        const settingsDoc = await getDoc(doc(db!, "siteContent", "settings"));
         if (settingsDoc.exists()) {
           const data = settingsDoc.data();
           setSettings({

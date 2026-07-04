@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { Menu, X, Sun, Moon, Palette } from "lucide-react";
 import Tippy from "@/components/ui/Tippy";
-import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { useProfile } from "@/hooks/useProfile";
 import { cn } from "@/lib/utils";
-import { useUIStore, THEMES, type ThemeId } from "@/store/uiStore";
+import { useUIStore, type ThemeId } from "@/store/uiStore";
 
 const NAV_ITEMS = [
   { id: "hero", label: "Home" },

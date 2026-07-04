@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useFirestoreDoc } from "@/hooks/useFirestore";
-import { SaveBtn, DeleteBtn } from "@/admin/components/FormFields";
 import { Plus, X } from "lucide-react";
 
 interface HeroRole {
@@ -26,7 +25,7 @@ interface Budget {
 }
 
 export function SiteSettingsPage() {
-  const { data: settings, update } = useFirestoreDoc<any>("siteContent", "settings");
+  const { data: settings, save } = useFirestoreDoc<any>("siteContent", "settings");
   const [roles, setRoles] = useState<HeroRole[]>([]);
   const [stats, setStats] = useState<Stat[]>([]);
   const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]);
@@ -49,7 +48,7 @@ export function SiteSettingsPage() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      await update({
+      await save({
         heroRoles: roles,
         aboutStats: stats,
         projectTypes: projectTypes,
