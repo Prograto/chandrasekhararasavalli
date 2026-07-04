@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Tippy from "@/components/ui/Tippy";
 import { useFirestoreCollection } from "@/hooks/useFirestore";
 import { experience as staticExperience } from "@/data/experience";
@@ -15,15 +14,15 @@ const STORY_CLOUDS: Record<string, string> = {
 };
 
 function TimelineItem({ item, index }: { item: typeof staticExperience[number]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
-  const x = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? -60 : 60, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.95, 1]);
-
   return (
     <Tippy content={STORY_CLOUDS[item.id] || item.summary} theme="flight-log" animation="shift-away" arrow delay={[300, 100]} maxWidth={220}>
-      <motion.div ref={ref} style={{ x, opacity, scale }} className="relative">
+      <motion.div
+        initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40, scale: 0.95 }}
+        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative"
+      >
         <div className="glass-hi rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 group" style={{ borderColor: `var(--t-accent)10` }}>
           <div className="absolute -top-3 -left-3 w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs font-bold"
             style={{ background: `var(--t-accent)20`, border: `1px solid var(--t-accent)50`, color: "var(--t-accent)" }}>
