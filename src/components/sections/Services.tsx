@@ -17,8 +17,23 @@ function ServiceCard({ service, index }: { service: typeof services[number]; ind
       className="group relative rounded-2xl overflow-hidden"
       style={{ background: "var(--t-surface)", border: `1px solid var(--t-border)` }}
     >
-      {/* Top accent line */}
-      <div className="h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${service.color}, transparent)` }} />
+      {/* Top accent line with moving scanner */}
+      <div className="relative h-[2px] w-full bg-white/5 overflow-hidden">
+        <motion.div
+          className="absolute top-0 bottom-0 w-[40%]"
+          style={{
+            background: `linear-gradient(90deg, transparent, ${service.color}, transparent)`
+          }}
+          animate={{
+            left: index % 2 === 0 ? ["-40%", "100%", "-40%"] : ["100%", "-40%", "100%"]
+          }}
+          transition={{
+            duration: 3 + (index * 0.5) % 2, // staggered speed for natural distribution
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
 
       <div className="p-6">
         {/* Icon */}

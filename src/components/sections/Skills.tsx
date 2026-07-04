@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Tippy from "@/components/ui/Tippy";
 import { useFirestoreCollection } from "@/hooks/useFirestore";
 import { skillCategories as staticSkillCategories } from "@/data/skills";
@@ -15,18 +14,18 @@ const SKILL_STORIES: Record<string, string> = {
 };
 
 function SkillBar({ name, level, color, index }: { name: string; level: number; color: string; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
   return (
     <Tippy content={SKILL_STORIES[name] || `${name}: Part of the instrument cluster.`} theme="flight-log" animation="shift-away" delay={[300, 100]} maxWidth={220}>
-      <div ref={ref} className="mb-3 cursor-default">
+      <div className="mb-3 cursor-default">
         <div className="flex justify-between items-center mb-1.5">
           <span className="text-sm" style={{ color: "var(--t-text)", opacity: 0.8 }}>{name}</span>
           <span className="font-mono text-xs" style={{ color }}>{level}%</span>
         </div>
         <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "var(--t-border)" }}>
           <motion.div className="h-full rounded-full" style={{ background: `linear-gradient(90deg, ${color}80, ${color})` }}
-            initial={{ width: 0 }} animate={{ width: inView ? `${level}%` : 0 }}
+            initial={{ width: 0 }}
+            whileInView={{ width: `${level}%` }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: index * 0.06, ease: [0.25, 1, 0.5, 1] }} />
         </div>
       </div>

@@ -137,7 +137,7 @@ export function Hero() {
               style={{ background: `linear-gradient(135deg, var(--t-accent), var(--t-accent2), var(--t-accent))` }} />
             <div className="relative w-72 h-96 rounded-[2rem] overflow-hidden border-2 group-hover:scale-[1.02] transition-transform duration-500"
               style={{ borderColor: `var(--t-accent)50` }}>
-              <img src={profile.avatar || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face"} alt={profile.name} className="w-full h-full object-cover object-top" />
+              <img src={profile.avatar} alt={profile.name} className="w-full h-full object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 glass rounded-xl px-4 py-3">
                 <p className="font-display font-bold text-white text-sm">{profile.name}</p>
