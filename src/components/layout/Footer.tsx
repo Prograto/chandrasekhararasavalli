@@ -42,7 +42,7 @@ export function Footer() {
               })}
             </div>
             <div className="mt-6">
-              <a href={profile.resumeUrl} download className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+              <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
                 style={{ background: `var(--t-accent)12`, border: `1px solid var(--t-accent)30`, color: "var(--t-accent)" }}>Download Resume</a>
             </div>
           </div>

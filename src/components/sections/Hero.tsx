@@ -112,7 +112,7 @@ export function Hero() {
               className="flex items-center gap-2 px-6 py-3 rounded-xl glass border border-green-500/30 text-green-400 hover:bg-green-500/10 font-semibold transition-all duration-300 hover:-translate-y-0.5">
               <WhatsappIcon size={16} /> WhatsApp
             </a>
-            <a href={profile.resumeUrl} download
+            <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 rounded-xl glass font-semibold transition-all duration-300 hover:-translate-y-0.5" style={{ color: "var(--t-text)" }}>
               <Download size={16} /> Resume
             </a>

@@ -135,7 +135,7 @@ export function Navbar() {
             <a href="https://github.com/Prograto" target="_blank" rel="noopener noreferrer" style={{ color: "var(--t-muted)" }} className="hover:opacity-80"><GithubIcon size={16} /></a>
             <a href="https://www.linkedin.com/in/chandu-smart-techtuts/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--t-muted)" }} className="hover:opacity-80"><LinkedinIcon size={16} /></a>
           </div>
-          <a href={profile.resumeUrl} download className="hidden lg:flex items-center px-3 py-1.5 rounded-lg text-xs font-medium"
+          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="hidden lg:flex items-center px-3 py-1.5 rounded-lg text-xs font-medium"
             style={{ background: `var(--t-accent)12`, border: `1px solid var(--t-accent)25`, color: "var(--t-text)" }}>Resume</a>
           <button onClick={() => setOpen(true)} className="lg:hidden p-1" style={{ color: "var(--t-text)" }} aria-label="Menu"><Menu size={22} /></button>
         </div>
