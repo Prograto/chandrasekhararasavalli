@@ -161,6 +161,8 @@ export function ImageUpload({ label, value, onChange, required = false }: {
       )}
     </div>
   );
+}
+
 // ─── Tag/List Input ───
 export function TagInput({ label, tags, onChange }: { label: string; tags: string[]; onChange: (t: string[]) => void }) {
   const [input, setInput] = useState("");
