@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db, isConfigured } from "@/lib/firebase";
+import { AdminNotificationListener } from "./components/AdminNotificationListener";
 import {
   LayoutDashboard, User, Briefcase, FolderKanban, Wrench,
   Award, MessageSquare, LogOut, ArrowLeft, Code, Menu, X as CloseIcon,
@@ -26,6 +29,17 @@ export function AdminLayout() {
   const { signOut, user } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  // Listen to unread message count in real time
+  useEffect(() => {
+    if (!db || !isConfigured) return;
+    const q = query(collection(db, "contactMessages"), where("status", "==", "new"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setUnreadCount(snapshot.size);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleSignOut = async () => {
     await signOut();
@@ -34,13 +48,18 @@ export function AdminLayout() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row" style={{ background: "var(--t-bg)" }}>
+      <AdminNotificationListener />
       {/* Mobile header */}
       <div className="lg:hidden flex items-center justify-between px-4 py-4 border-b" style={{ borderColor: "var(--t-border)" }}>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg" style={{ color: "var(--t-text)" }}>
           {sidebarOpen ? <CloseIcon size={20} /> : <Menu size={20} />}
         </button>
         <h2 className="font-display font-bold text-sm" style={{ color: "var(--t-text)" }}>Admin</h2>
-        <div className="w-8" />
+        <div className="w-8 flex items-center justify-center">
+          {unreadCount > 0 && (
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500 animate-ping" />
+          )}
+        </div>
       </div>
 
       {/* Sidebar */}
@@ -60,23 +79,31 @@ export function AdminLayout() {
         </div>
 
         <nav className="flex-1 py-3 px-3 space-y-0.5 overflow-y-auto">
-          {NAV.map(({ to, icon: Icon, label }) => (
-            <NavLink key={to} to={to} end={to === "/admin"}
-              onClick={() => setSidebarOpen(false)}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all ${
-                  isActive ? "font-medium" : ""
-                }`
-              }
-              style={({ isActive }) => ({
-                background: isActive ? `var(--t-accent)12` : "transparent",
-                color: isActive ? "var(--t-accent)" : "var(--t-muted)",
-              })}
-            >
-              <Icon size={16} />
-              {label}
-            </NavLink>
-          ))}
+          {NAV.map(({ to, icon: Icon, label }) => {
+            const isMessages = label === "Messages";
+            return (
+              <NavLink key={to} to={to} end={to === "/admin"}
+                onClick={() => setSidebarOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all ${
+                    isActive ? "font-medium" : ""
+                  }`
+                }
+                style={({ isActive }) => ({
+                  background: isActive ? `var(--t-accent)12` : "transparent",
+                  color: isActive ? "var(--t-accent)" : "var(--t-muted)",
+                })}
+              >
+                <Icon size={16} />
+                <span className="flex-1">{label}</span>
+                {isMessages && unreadCount > 0 && (
+                  <span className="flex h-5 min-w-5 px-1.5 items-center justify-center rounded-full bg-yellow-500 text-[10px] font-bold text-black animate-pulse">
+                    {unreadCount}
+                  </span>
+                )}
+              </NavLink>
+            );
+          })}
         </nav>
 
         <div className="px-3 py-4 border-t space-y-1" style={{ borderColor: "var(--t-border)" }}>
