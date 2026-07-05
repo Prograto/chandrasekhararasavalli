@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chandrasekhar.dev/sitemap.xml
+Sitemap: https://chandrasekhararasavalli.vercel.app/sitemap.xml
