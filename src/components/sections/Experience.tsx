@@ -97,9 +97,9 @@ export function Experience() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-16">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] mb-4" style={{ color: "var(--t-accent)" }}>02 — Experience</p>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] mb-4" style={{ color: "var(--t-accent)" }}>02 — Experience & Freelance</p>
           <h2 className="hud-scan font-display text-4xl sm:text-5xl font-bold" style={{ color: "var(--t-text)" }}>
-            <TextBlowOut text="Where I've worked" delay={0.1} /><span style={{ color: "var(--t-accent)" }}>.</span>
+            <TextBlowOut text="Experience & Freelance" delay={0.1} /><span style={{ color: "var(--t-accent)" }}>.</span>
           </h2>
         </motion.div>
 

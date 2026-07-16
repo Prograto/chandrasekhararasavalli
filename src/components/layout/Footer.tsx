@@ -48,7 +48,7 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t pt-8" style={{ borderColor: "var(--t-border)" }}>
-          <p className="font-mono text-xs" style={{ color: "var(--t-muted)", opacity: 0.5 }}>© {new Date().getFullYear()} Chandra Sekhar Arasavalli · Built with React, Three.js & a lot of coffee.</p>
+          <p className="font-mono text-xs" style={{ color: "var(--t-muted)", opacity: 0.5 }}>© {new Date().getFullYear()} Chandra Sekhar Arasavalli (Prograto) · Creator of Chandu Smart TechTuts · Built with React & Three.js.</p>
           <motion.button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} whileHover={{ y: -3 }}
             className="flex items-center gap-2 font-mono text-xs" style={{ color: "var(--t-accent)" }}>Back to top <ArrowUp size={13} /></motion.button>
         </div>
